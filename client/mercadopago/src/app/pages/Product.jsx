@@ -1,7 +1,37 @@
 import { Box, Button, Container, Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from 'axios';
 
 export const Product = () => {
+    const [preferenceID, setPreference] = useState(null);
+
+    initMercadoPago('YOUR_PUBLIC_KEY', {
+        locale: 'es-MX'
+    });
+
+    const createPreference = async () => {
+        try {
+            const response = await axios.post("http://127.0.0.1:5173/create_preference", {
+                title: 'Mustang',
+                quantity: 1,
+                price: 100,
+            });
+
+            const { id } = response.data;
+            return id;
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    };
+
+    const handleClick = async () => {
+        const id = await createPreference();
+        if (id) {
+            setPreference(id);
+        }
+    };
+
     return (
         <Grid container height='100vh' justifyContent='center' alignItems='center'>
             <Container
@@ -24,6 +54,7 @@ export const Product = () => {
                     }}
                 />
                 <Button
+                    onClick={handleClick}
                     sx={{
                         textTransform: 'none',
                         bgcolor: 'primary.main',
@@ -35,6 +66,10 @@ export const Product = () => {
                 >
                     Buy here!
                 </Button>
+
+                {preferenceID && (
+                    <Wallet initialization={{ preferenceId: preferenceID }} customization={{ texts: { valueProp: 'smart_option' } }} />
+                )}
             </Container>
         </Grid>
     );
