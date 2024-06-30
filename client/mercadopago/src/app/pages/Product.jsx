@@ -2,17 +2,17 @@ import { Box, Button, Container, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
+import { PUBLIC_KEY } from '../../config';
 
 export const Product = () => {
     const [preferenceID, setPreference] = useState(null);
-
-    initMercadoPago('YOUR_PUBLIC_KEY', {
+    initMercadoPago(PUBLIC_KEY, {
         locale: 'es-MX'
     });
 
     const createPreference = async () => {
         try {
-            const response = await axios.post("http://127.0.0.1:5173/create_preference", {
+            const response = await axios.post("http://127.0.0.1:3000/create_preference", {
                 title: 'Mustang',
                 quantity: 1,
                 price: 100,
