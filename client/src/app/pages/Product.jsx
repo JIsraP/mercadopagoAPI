@@ -7,17 +7,12 @@ import { PUBLIC_KEY } from '../../config';
 export const Product = () => {
     const [preferenceID, setPreference] = useState(null);
     initMercadoPago(PUBLIC_KEY, {
-        locale: 'es-MX'
+        locale: 'es-MX',
     });
 
-    const createPreference = async () => {
+    const createPreference = async (items) => {
         try {
-            const response = await axios.post("http://127.0.0.1:3000/create_preference", {
-                title: 'Mustang',
-                quantity: 1,
-                price: 100,
-            });
-
+            const response = await axios.post("http://127.0.0.1:3000/create_preference", { items });
             const { id } = response.data;
             return id;
         } catch (error) {
@@ -26,7 +21,11 @@ export const Product = () => {
     };
 
     const handleClick = async () => {
-        const id = await createPreference();
+        const items = [
+            { title: 'Mustang', quantity: 1, unit_price: 100 },
+            { title: 'Camaro', quantity: 1, unit_price: 200 },
+        ];
+        const id = await createPreference(items);
         if (id) {
             setPreference(id);
         }
@@ -40,7 +39,7 @@ export const Product = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}
             >
                 <Box
@@ -50,7 +49,7 @@ export const Product = () => {
                     sx={{
                         marginBottom: 2,
                         width: '100%',
-                        maxWidth: '300px'
+                        maxWidth: '300px',
                     }}
                 />
                 <Button
@@ -61,7 +60,7 @@ export const Product = () => {
                         color: 'App.white',
                         '&:hover': {
                             bgcolor: 'primary.light',
-                        }
+                        },
                     }}
                 >
                     Buy here!
