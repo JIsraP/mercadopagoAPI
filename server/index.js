@@ -1,7 +1,5 @@
 import express from "express";
 import cors from "cors";
-
-// SDK de Mercado Pago
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { ACCESS_TOKEN } from "./config.js";
 
@@ -16,40 +14,40 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("Bienvenido al server :)")
+    res.send("Bienvenido al server :)");
 });
 
-app.post("/create_preference", async(req, res) => {
-    try{
-        const body = {
-            items: [
-                {
-                    title: req.body.title,
-                    quantity: Number(req.body.quantity),
-                    unit_price: Number(req.body.price),
-                    currency_id: "MXN",
-                },
-            ],
+app.post("/create_preference", async (req, res) => {
+    try {
+        const { items } = req.body;
+        const preferenceData = {
+            items: items.map(item => ({
+                title: item.title,
+                quantity: Number(item.quantity),
+                unit_price: Number(item.unit_price),
+                currency_id: "MXN",
+            })),
             back_urls: {
                 success: "https://www.youtube.com",
                 failure: "https://www.google.com",
-                pending: "https://www.amazon.com"
+                pending: "https://www.amazon.com",
             },
             auto_return: "approved",
         };
+
         const preference = new Preference(client);
-        const result = await preference.create( { body } );
+        const result = await preference.create({ body: preferenceData });
         res.json({
-            id: result.id
+            id: result.id,
         });
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: "Error al crear preferencia"
+            error: "Error al crear preferencia",
         });
     }
 });
 
 app.listen(port, () => {
-    console.log(`Server corriendo en el puerto ${port}`)
+    console.log(`Server corriendo en el puerto ${port}`);
 });
