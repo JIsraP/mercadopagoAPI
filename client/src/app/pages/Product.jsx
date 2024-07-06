@@ -96,45 +96,7 @@ export const Product = () => {
 
     return (
         <Grid container height='100vh' justifyContent='center' alignItems='center'>
-            <NavBar pages={pages} setSearchQuery={setProductQuery} placeholder="Search"/>
-            {/* <Container
-                maxWidth="sm"
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <Box
-                    component="img"
-                    src="./mustang.jpeg"
-                    alt="Product"
-                    sx={{
-                        marginBottom: 2,
-                        width: '100%',
-                        maxWidth: '300px',
-                    }}
-                />
-                <Button
-                    onClick={handleClick}
-                    sx={{
-                        textTransform: 'none',
-                        bgcolor: 'primary.main',
-                        color: 'App.white',
-                        '&:hover': {
-                            bgcolor: 'primary.light',
-                        },
-                    }}
-                >
-                    Buy here!
-                </Button>
-
-                {preferenceID && (
-                    <Wallet initialization={{ preferenceId: preferenceID }} customization={{ texts: { valueProp: 'smart_option' } }} />
-                )}
-
-            </Container> */}
+            <NavBar pages={pages} setSearchQuery={setProductQuery} placeholder="Search" />
             <Container
                 maxWidth='xl'
                 sx={{
@@ -153,7 +115,7 @@ export const Product = () => {
                                 <CardProduct producto={product} />
                             </Grid>
                         ))) : (
-                        <Grid item container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <Grid item container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Typography>No hay coincidencias con tu búsqueda</Typography>
                         </Grid>
                     )}

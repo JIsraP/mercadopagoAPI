@@ -10,8 +10,8 @@ export const CardProduct = ({ producto }) => {
         addToCart(producto);
     }
     return (
-        <Card sx={{ maxWidth: '25vw', maxHeight: '55vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: '24px', bgcolor: 'transparent' }}>
-            <CardContent sx={{ width: '100%', bgcolor: 'App.card_action', minHeight: '55vh', display: 'flex', alignItems: 'flex-end' }}>
+        <Card sx={{ maxWidth: '25em', maxHeight: '30em', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: '24px', bgcolor: 'transparent' }}>
+            <CardContent sx={{ width: '100%', bgcolor: 'App.card_action', minHeight: '30em', display: 'flex', alignItems: 'flex-end' }}>
                 <Grid container alignItems='center' justifyContent='space-between'>
                     <Grid item>
                         <Grid item xs={12} sx={{ ml: 3 }}>
@@ -48,7 +48,7 @@ export const CardProduct = ({ producto }) => {
                 </Grid>
             </CardContent>
 
-            <CardContent sx={{ width: '100%', borderRadius: '24px', bgcolor: 'App.card_data', position: 'relative', bottom: '55vh', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.03)', padding: 0 }}>
+            <CardContent sx={{ width: '100%', borderRadius: '24px', bgcolor: 'App.card_data', position: 'relative', bottom: '30em', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.03)', padding: 0 }}>
                 <Box sx={{ width: '100%' }}>
                     <CardMedia
                         component="img"
@@ -80,35 +80,6 @@ export const CardProduct = ({ producto }) => {
                     </Grid>
 
                 </Grid>
-
-            </CardContent>
-
-
-            <CardContent >
-                {producto.discount_percentage > 0 && (
-                    <Card sx={{ bgcolor: 'App.card_discount', maxWidth: '80px', maxHeight: '35px', borderRadius: '24px', display: 'flex', alignItems: 'center', position: 'relative', bottom: '925px', left: '85%' }}>
-                        <CardContent>
-                            <Typography sx={{ fontSize: '12px', color: 'App.white', fontWeight: 'bold', mt: 1 }}>
-                                -{producto.discount_percentage}%
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                )}
-
-                <Card sx={{ bgcolor: 'App.card_likes', maxWidth: '90px', maxHeight: '35px', borderRadius: '24px', display: 'flex', alignItems: 'center', position: 'relative', bottom: producto.discount_percentage > 0 ? '1000px' : '965px', left: '80%' }}>
-                    <CardContent>
-                        <Grid container alignItems="center" spacing={1}>
-                            <Grid item>
-                                <FavoriteBorderOutlined sx={{ fontSize: '14px', color: 'App.card_heart', mt: 2 }} />
-                            </Grid>
-                            <Grid item>
-                                <Typography sx={{ fontSize: '12px', color: 'App.text', fontWeight: 'bold', mt: 1 }}>
-                                    {producto.likes}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
             </CardContent>
         </Card>
     )
