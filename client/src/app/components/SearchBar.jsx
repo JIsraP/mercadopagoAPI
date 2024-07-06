@@ -8,7 +8,6 @@ export const SearchBar = ({ setSearchQuery, placeholder }) => {
     };
     return (
         <FormControl size='small' fullWidth sx={{ backgroundColor: 'transparent', borderRadius: 5 }}>
-            
             <OutlinedInput
                 type="text"
                 onChange={handleSearchChange}

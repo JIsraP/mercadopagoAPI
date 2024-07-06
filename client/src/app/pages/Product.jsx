@@ -1,8 +1,5 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
-import axios from 'axios';
-import { PUBLIC_KEY } from '../../config';
 import { CardProduct, NavBar } from '../components';
 
 export const Product = () => {
@@ -50,7 +47,7 @@ export const Product = () => {
             "img": "https://www.mercedes-fans.de/thumbs/lib/04/31/08/o_wide/83104.jpg"
         },
         "005": {
-            "name": "60 Billion Probiotics",
+            "name": "Mclaren Senna",
             "price": 259,
             "details": "V8 engine | 789 HP",
             "discount_percentage": 0,
@@ -60,7 +57,7 @@ export const Product = () => {
             "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/McLaren_Senna_Genf_2018.jpg/1200px-McLaren_Senna_Genf_2018.jpg"
         },
         "006": {
-            "name": "Resveratrol",
+            "name": "Ford Raptor",
             "price": 349,
             "details": "V8 engine | 405 HP",
             "discount_percentage": 0,
@@ -73,17 +70,11 @@ export const Product = () => {
 
     const [productQuery, setProductQuery] = useState("");
     const [dataFiltered, setFilter] = useState([]);
-    const [preferenceID, setPreference] = useState(null);
-
-    initMercadoPago(PUBLIC_KEY, {
-        locale: 'es-MX',
-    });
 
     const pages = [
         { name: 'Test', route: '/products' },
         { name: 'About Us', route: '/aboutus' },
     ]
-
 
     const filterData = (productQuery, products) => {
         if (!productQuery) {
@@ -97,27 +88,6 @@ export const Product = () => {
         }
     };
 
-    const createPreference = async (items) => {
-        try {
-            const response = await axios.post("http://127.0.0.1:3000/create_preference", { items });
-            const { id } = response.data;
-            return id;
-        } catch (error) {
-            console.log("Error: ", error);
-        }
-    };
-
-    const handleClick = async () => {
-        const items = [
-            { title: 'Mustang', quantity: 1, unit_price: 100 },
-            { title: 'Camaro', quantity: 1, unit_price: 200 },
-        ];
-        const id = await createPreference(items);
-        if (id) {
-            setPreference(id);
-        }
-    };
-
     useEffect(() => {
         const filteredData = filterData(productQuery, productos);
         setFilter(filteredData);
@@ -125,8 +95,8 @@ export const Product = () => {
 
 
     return (
-        <Grid container justifyContent='center' alignItems='center'>
-            <NavBar pages={pages} setSearchQuery={setProductQuery} placeholder="Productos"/>
+        <Grid container height='100vh' justifyContent='center' alignItems='center'>
+            <NavBar pages={pages} setSearchQuery={setProductQuery} placeholder="Search"/>
             {/* <Container
                 maxWidth="sm"
                 sx={{
@@ -172,8 +142,8 @@ export const Product = () => {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    mt: '10vh',
-                    padding: 5
+                    mt: '13vh',
+                    padding: 2,
                 }}
             >
                 <Grid container spacing={2} justifyContent='space-around'>
@@ -183,7 +153,7 @@ export const Product = () => {
                                 <CardProduct producto={product} />
                             </Grid>
                         ))) : (
-                        <Grid item container sx={{ mt: '5vh', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh' }}>
+                        <Grid item container sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             <Typography>No hay coincidencias con tu búsqueda</Typography>
                         </Grid>
                     )}

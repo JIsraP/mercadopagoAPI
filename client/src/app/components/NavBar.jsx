@@ -2,10 +2,10 @@ import { AppBar, Badge, Button, Grid, IconButton, Popover, Toolbar, useMediaQuer
 import { GridMenuIcon } from '@mui/x-data-grid';
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AccountCircleOutlined, Logout, ShoppingBagOutlined } from "@mui/icons-material";
-import { SearchIcon } from "./SearchIcon";
+import { ShoppingBagOutlined } from "@mui/icons-material";
 import { useCart } from "../../hooks";
 import { CartContent } from "./CartContent";
+import { SearchBar } from "./SearchBar";
 
 export const NavBar = ({ pages, setSearchQuery, placeholder }) => {
     const { cartItems } = useCart();
@@ -112,23 +112,17 @@ export const NavBar = ({ pages, setSearchQuery, placeholder }) => {
 
                         </Grid>
                     }
-                    
+
                     <Grid item xs={4} >
                         <Grid container justifyContent='flex-end'>
                             <Grid item>
-                                <SearchIcon setSearchQuery={setSearchQuery} placeholder={placeholder} />
-                            </Grid>
-
-                            <Grid item>
-                                <IconButton>
-                                    <AccountCircleOutlined sx={{fontSize: '20px'}}/>
-                                </IconButton>
+                                <SearchBar setSearchQuery={setSearchQuery} placeholder={placeholder} />
                             </Grid>
 
                             <Grid item>
                                 <IconButton onClick={handleCartOpen}>
                                     <Badge badgeContent={cartItems} color="error">
-                                        <ShoppingBagOutlined sx={{fontSize: '20px'}}/>
+                                        <ShoppingBagOutlined sx={{ fontSize: '20px' }} />
                                     </Badge>
                                 </IconButton>
                                 <Popover
