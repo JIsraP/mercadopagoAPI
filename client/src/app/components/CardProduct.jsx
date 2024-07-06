@@ -14,9 +14,9 @@ export const CardProduct = ({ producto }) => {
             <CardContent sx={{ width: '100%', bgcolor: 'App.card_action', minHeight: '30em', display: 'flex', alignItems: 'flex-end' }}>
                 <Grid container alignItems='center' justifyContent='space-between'>
                     <Grid item>
-                        <Grid item xs={12} sx={{ ml: 3 }}>
+                        <Grid item xs={12} sx={{ ml: 5 }}>
                             <Typography variant="body2" color="text.secondary" sx={{ textTransform: 'uppercase', fontSize: '10px' }}>
-                                Comparte
+                                Share
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -42,7 +42,7 @@ export const CardProduct = ({ producto }) => {
 
                     <Grid item>
                         <Button onClick={handleaddToCart} sx={{ textTransform: 'capitalize', borderRadius: '20px', border: '1px solid', width: '6vw', fontSize: '12px' }}>
-                            Agregar
+                            Add
                         </Button>
                     </Grid>
                 </Grid>
